@@ -1,8 +1,12 @@
 /* Header */
 header {
   max-width: 1400px;
+  background-color: #0e0e1080;
   margin: 0 auto;
   padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .logo {
