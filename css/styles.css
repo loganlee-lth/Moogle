@@ -92,6 +92,10 @@ ul a {
   gap: 1rem;
 }
 
+.hide {
+  display: none;
+}
+
 .movie {
   position: relative;
 }
