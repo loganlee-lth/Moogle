@@ -1,0 +1,26 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.row {
+  display: flex;
+}
+
+.column-full {
+  flex-basis: 100%;
+}
+
+.column-half {
+  flex-basis: 50%;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}

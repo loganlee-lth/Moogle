@@ -1,0 +1,15 @@
+header {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+ul {
+  list-style: none;
+}
+
+ul a {
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+}
