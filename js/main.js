@@ -9,21 +9,17 @@ const resultPage = 1;
 // Search button
 const $searchBtn = document.querySelector('.search-button');
 const $searchInput = document.querySelector('.search-input');
+
+// Movie container
 const $movieResults = document.querySelector('.movie-results');
 
-// results length = 20
-// keep track of pages
 function searchMovies() {
 
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `${SEARCH_URL}${$searchInput.value}&page=${resultPage}`);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-
     const results = xhr.response.results;
-    // console.log(xhr.response);
-    // console.log(results);
-
     showMovies(results);
   });
   xhr.send();
@@ -37,7 +33,6 @@ function showMovies(array) {
   }
 
   for (let i = 0; i < array.length; i++) {
-
     const $movie = document.createElement('div');
     $movie.classList.add('movie');
     const $moviePoster = document.createElement('img');
@@ -67,7 +62,6 @@ function showMovies(array) {
     $movieRating.append($ratingIcon, array[i].vote_average.toFixed(2));
     const $movieYear = document.createElement('p');
     $movieYear.classList.add('movie-year');
-    // if date = null then return '-'
     $movieYear.textContent = array[i].release_date.substring(0, 4);
     $movie.append($moviePoster);
     $movie.append($bookmarkIcon);
