@@ -7,13 +7,16 @@ const SEARCH_URL = `${BASE_URL}/search/movie?${API_KEY}&include_adult=false&lang
 const resultPage = 1;
 
 // Search button
+const $searchBtn = document.querySelector('.search-button');
 const $searchInput = document.querySelector('.search-input');
 const $movieResults = document.querySelector('.movie-results');
 
+// results length = 20
+// keep track of pages
 function searchMovies() {
 
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `${SEARCH_URL}${$searchInput.value}&language=us-US&page=${resultPage}`);
+  xhr.open('GET', `${SEARCH_URL}${$searchInput.value}&page=${resultPage}`);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
 
@@ -77,4 +80,15 @@ function showMovies(array) {
   }
 }
 
-searchMovies();
+$searchBtn.addEventListener('click', () => {
+  searchMovies();
+  $searchInput.value = '';
+  document.documentElement.scrollTop = 0;
+});
+
+$searchInput.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    $searchBtn.click();
+  }
+});

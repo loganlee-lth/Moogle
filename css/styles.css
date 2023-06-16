@@ -88,9 +88,44 @@ ul a {
   gap: 1rem;
 }
 
+.movie {
+  position: relative;
+}
+
+.fa-plus {
+  color: #ffffff90;
+  font-size: 2rem;
+  position: absolute;
+  left: 0;
+}
+
+.fa-plus:hover {
+  color: yellow;
+}
+
 .movie-poster {
   max-width: 100%;
   width: 100%;
   aspect-ratio: 1 / 1.5;
   object-fit: fill;
+}
+
+.movie-info {
+  line-height: 1.5;
+}
+
+h3,
+p {
+  color: #fff;
+}
+
+h3 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.fa-star {
+  color: #fcf55f;
+  padding-right: 0.25rem;
 }
