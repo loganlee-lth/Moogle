@@ -1,3 +1,4 @@
+/* Header */
 header {
   max-width: 1400px;
   margin: 0 auto;
@@ -41,4 +42,35 @@ ul a {
   color: #fff;
   font-size: 0.9rem;
   padding: 0.5rem;
+}
+
+/* Search bar */
+.search-bar {
+  text-align: center;
+  position: relative;
+}
+
+.search-input {
+  width: 75%;
+  border: 1.5px solid #ccc;
+  border-radius: 20px;
+  padding: 0.8rem 0.8rem 0.8rem 2.6rem;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-button {
+  border: none;
+  background-color: transparent;
+  padding: 0.8rem;
+  cursor: pointer;
+  position: absolute;
+  left: 12.8%;
+}
+
+.fa-search {
+  color: #777;
+  font-size: 1rem;
 }
