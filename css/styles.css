@@ -74,3 +74,10 @@ ul a {
   color: #777;
   font-size: 1rem;
 }
+
+/* Movie container */
+.movie-results {
+  border: 2px solid #333;
+  border-radius: 5px;
+  padding: 1rem;
+}
