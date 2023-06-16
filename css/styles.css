@@ -81,3 +81,16 @@ ul a {
   border-radius: 5px;
   padding: 1rem;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+}
+
+.movie-poster {
+  max-width: 100%;
+  width: 100%;
+  aspect-ratio: 1 / 1.5;
+  object-fit: fill;
+}
