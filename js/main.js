@@ -44,7 +44,7 @@ function showMovies(array) {
     $moviePoster.classList.add('movie-poster');
 
     if (array[i].poster_path === null) {
-      // console.log('null');
+      $moviePoster.setAttribute('src', 'https://placehold.jp/DDDDDD/ffffff/500x750.jpg?text=No%20image%20available');
     } else {
       $moviePoster.setAttribute('src', `${IMG_URL}${array[i].poster_path}`);
     }
