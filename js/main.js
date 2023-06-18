@@ -16,13 +16,16 @@ const $movieResults = document.querySelector('.movie-results');
 function searchMovies() {
 
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `${SEARCH_URL}${$searchInput.value}&page=${resultPage}`);
-  xhr.responseType = 'json';
-  xhr.addEventListener('load', function () {
-    const results = xhr.response.results;
-    showMovies(results);
-  });
-  xhr.send();
+  const searchTitle = $searchInput.value.trim();
+  if (searchTitle) {
+    xhr.open('GET', `${SEARCH_URL}${$searchInput.value}&page=${resultPage}`);
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', function () {
+      const results = xhr.response.results;
+      showMovies(results);
+    });
+    xhr.send();
+  }
 }
 
 function showMovies(array) {
