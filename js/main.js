@@ -14,71 +14,70 @@ const $searchInput = document.querySelector('.search-input');
 const $movieResults = document.querySelector('.movie-results');
 
 function searchMovies() {
-
   const xhr = new XMLHttpRequest();
+
   const searchTitle = $searchInput.value.trim();
   if (searchTitle) {
     xhr.open('GET', `${SEARCH_URL}${searchTitle}&page=${resultPage}`);
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
       const results = xhr.response.results;
-      showMovies(results);
+
+      $movieResults.replaceChildren();
+      for (let i = 0; i < results.length; i++) {
+        $movieResults.append(renderMovie(results[i]));
+      }
     });
     xhr.send();
   }
 }
 
-function showMovies(array) {
-  $movieResults.classList.remove('hide');
+function renderMovie(results) {
 
-  while ($movieResults.firstChild) {
-    $movieResults.removeChild($movieResults.firstChild);
+  const $movie = document.createElement('div');
+  $movie.classList.add('movie');
+  const $moviePoster = document.createElement('img');
+  $moviePoster.classList.add('movie-poster');
+
+  if (results.poster_path === null) {
+    $moviePoster.setAttribute('src', 'https://placehold.jp/DDDDDD/ffffff/500x750.jpg?text=No%20image%20available');
+  } else {
+    $moviePoster.setAttribute('src', `${IMG_URL}${results.poster_path}`);
   }
 
-  for (let i = 0; i < array.length; i++) {
-    const $movie = document.createElement('div');
-    $movie.classList.add('movie');
-    const $moviePoster = document.createElement('img');
-    $moviePoster.classList.add('movie-poster');
+  const $bookmarkIcon = document.createElement('i');
+  $bookmarkIcon.classList.add('fa-regular', 'fa-plus');
+  const $movieTitle = document.createElement('h3');
+  $movieTitle.classList.add('movie-title');
+  $movieTitle.textContent = results.title;
+  const $movieInfo = document.createElement('div');
+  $movieInfo.classList.add('movie-info', 'row');
 
-    if (array[i].poster_path === null) {
-      $moviePoster.setAttribute('src', 'https://placehold.jp/DDDDDD/ffffff/500x750.jpg?text=No%20image%20available');
-    } else {
-      $moviePoster.setAttribute('src', `${IMG_URL}${array[i].poster_path}`);
-    }
+  const $movieInfoCol = document.createElement('div');
+  $movieInfoCol.classList.add('column-full', 'space-between');
+  const $movieRating = document.createElement('p');
+  $movieRating.classList.add('movie-rating');
+  const $ratingIcon = document.createElement('i');
+  $ratingIcon.classList.add('fa-solid', 'fa-star');
 
-    const $bookmarkIcon = document.createElement('i');
-    $bookmarkIcon.classList.add('fa-regular', 'fa-plus');
-    const $movieTitle = document.createElement('h3');
-    $movieTitle.classList.add('movie-title');
-    $movieTitle.textContent = array[i].title;
-    const $movieInfo = document.createElement('div');
-    $movieInfo.classList.add('movie-info', 'row');
+  $movieRating.append($ratingIcon, results.vote_average.toFixed(2));
+  const $movieYear = document.createElement('p');
+  $movieYear.classList.add('movie-year');
+  $movieYear.textContent = results.release_date.substring(0, 4);
+  $movie.append($moviePoster);
+  $movie.append($bookmarkIcon);
+  $movie.append($movieTitle);
+  $movie.append($movieInfo);
+  $movieInfo.append($movieInfoCol);
+  $movieInfoCol.append($movieRating);
+  $movieInfoCol.append($movieYear);
 
-    const $movieInfoCol = document.createElement('div');
-    $movieInfoCol.classList.add('column-full', 'space-between');
-    const $movieRating = document.createElement('p');
-    $movieRating.classList.add('movie-rating');
-    const $ratingIcon = document.createElement('i');
-    $ratingIcon.classList.add('fa-solid', 'fa-star');
-
-    $movieRating.append($ratingIcon, array[i].vote_average.toFixed(2));
-    const $movieYear = document.createElement('p');
-    $movieYear.classList.add('movie-year');
-    $movieYear.textContent = array[i].release_date.substring(0, 4);
-    $movie.append($moviePoster);
-    $movie.append($bookmarkIcon);
-    $movie.append($movieTitle);
-    $movie.append($movieInfo);
-    $movieInfo.append($movieInfoCol);
-    $movieInfoCol.append($movieRating);
-    $movieInfoCol.append($movieYear);
-    $movieResults.append($movie);
-  }
+  return $movie;
 }
 
 $searchBtn.addEventListener('click', () => {
   searchMovies();
+  $movieResults.classList.remove('hide');
   $searchInput.value = '';
   document.documentElement.scrollTop = 0;
 });
