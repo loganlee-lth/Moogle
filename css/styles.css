@@ -93,10 +93,6 @@ ul a {
   gap: 1rem;
 }
 
-.hide {
-  display: none;
-}
-
 /* Movie results */
 .movie {
   position: relative;
@@ -142,8 +138,6 @@ h3 {
 
 @media screen and (min-width: 768px) {
   .grid {
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10rem, 0.3333fr));
-    gap: 1rem;
   }
 }
