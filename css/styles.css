@@ -52,6 +52,7 @@ ul a {
 .search-bar {
   text-align: center;
   position: relative;
+  padding-bottom: 4rem;
 }
 
 .search-input {
@@ -88,7 +89,7 @@ ul a {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 0.5fr));
   gap: 1rem;
 }
 
@@ -137,4 +138,12 @@ h3 {
 .fa-star {
   color: #fcf55f;
   padding-right: 0.25rem;
+}
+
+@media screen and (min-width: 768px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 0.3333fr));
+    gap: 1rem;
+  }
 }
