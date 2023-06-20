@@ -98,14 +98,15 @@ ul a {
   position: relative;
 }
 
-.fa-plus {
+.fa-bookmark {
   color: #ffffff90;
   font-size: 2rem;
   position: absolute;
   left: 0;
 }
 
-.fa-plus:hover {
+.fa-bookmark:hover,
+.icon-yellow {
   color: yellow;
 }
 
