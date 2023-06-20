@@ -90,3 +90,17 @@ $searchInput.addEventListener('keypress', function (event) {
     $searchBtn.click();
   }
 });
+
+$movieResults.addEventListener('click', event => {
+  if (event.target.tagName === 'I') {
+    const watchListMovie = {};
+    watchListMovie.poster_path = event.target.closest('.movie').querySelector('img').src;
+    watchListMovie.title = event.target.closest('.movie').querySelector('.movie-title').textContent;
+    watchListMovie.vote_average = event.target.closest('.movie').querySelector('.movie-rating').textContent;
+    watchListMovie.release_date = event.target.closest('.movie').querySelector('.movie-year').textContent;
+    watchListMovie.movieId = data.nextMovieId;
+    data.nextMovieId++;
+
+    data.watchlist.unshift(watchListMovie);
+  }
+});
