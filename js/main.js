@@ -95,6 +95,7 @@ $searchInput.addEventListener('keypress', function (event) {
 
 $movieResults.addEventListener('click', event => {
   if (event.target.tagName === 'I') {
+    event.target.classList.add('icon-yellow');
     const watchListMovie = {};
     watchListMovie.poster_path = event.target.closest('.movie').querySelector('img').src;
     watchListMovie.title = event.target.closest('.movie').querySelector('.movie-title').textContent;

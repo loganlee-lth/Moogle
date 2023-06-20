@@ -105,7 +105,8 @@ ul a {
   left: 0;
 }
 
-.fa-bookmark:hover {
+.fa-bookmark:hover,
+.icon-yellow {
   color: yellow;
 }
 
