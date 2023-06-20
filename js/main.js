@@ -32,6 +32,8 @@ function searchMovies() {
   }
 }
 
+// {/* <i class="fa-solid fa-bookmark fa-fade"></i> */}
+
 function renderMovie(results) {
 
   const $movie = document.createElement('div');
@@ -48,7 +50,7 @@ function renderMovie(results) {
   }
 
   const $bookmarkIcon = document.createElement('i');
-  $bookmarkIcon.classList.add('fa-regular', 'fa-plus');
+  $bookmarkIcon.classList.add('fa-solid', 'fa-bookmark');
   const $movieTitle = document.createElement('h3');
   $movieTitle.classList.add('movie-title');
   $movieTitle.textContent = results.title;
