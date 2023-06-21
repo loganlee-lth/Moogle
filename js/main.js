@@ -123,6 +123,7 @@ $movieSearchResults.addEventListener('click', event => {
     watchListMovie.id = Number(event.target.closest('.movie').getAttribute('id'));
 
     data.watchlist.unshift(watchListMovie);
+    $movieWatchlistResults.prepend(renderMovie(watchListMovie));
   }
 });
 
