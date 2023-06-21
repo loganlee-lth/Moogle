@@ -10,8 +10,9 @@ const resultPage = 1;
 const $searchBtn = document.querySelector('.search-button');
 const $searchInput = document.querySelector('.search-input');
 
-// Movie container
-const $movieResults = document.querySelector('.movie-results');
+// Movie containers
+const $movieSearchResults = document.querySelector('.movie-results');
+const $movieWatchlistResults = document.querySelector('.movie-watchlist');
 
 function searchMovies() {
   const xhr = new XMLHttpRequest();
@@ -21,15 +22,16 @@ function searchMovies() {
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
       const results = xhr.response.results;
-      $movieResults.replaceChildren();
+      $movieSearchResults.replaceChildren();
       for (let i = 0; i < results.length; i++) {
-        $movieResults.append(renderMovie(results[i]));
+        $movieSearchResults.append(renderMovie(results[i]));
       }
     });
     xhr.send();
   }
 }
 
+// Render movie function
 function renderMovie(results) {
 
   const $movie = document.createElement('div');
@@ -65,7 +67,7 @@ function renderMovie(results) {
   $movieRating.classList.add('movie-rating');
   const $ratingIcon = document.createElement('i');
   $ratingIcon.classList.add('fa-solid', 'fa-star');
-  $movieRating.append($ratingIcon, results.vote_average.toFixed(2));
+  $movieRating.append($ratingIcon, Number(results.vote_average).toFixed(2));
   const $movieYear = document.createElement('p');
   $movieYear.classList.add('movie-year');
   $movieYear.textContent = results.release_date.substring(0, 4);
@@ -83,7 +85,7 @@ function renderMovie(results) {
 
 $searchBtn.addEventListener('click', () => {
   searchMovies();
-  $movieResults.classList.remove('hide');
+  $movieSearchResults.classList.remove('hide');
   $searchInput.value = '';
   document.documentElement.scrollTop = 0;
 });
@@ -95,7 +97,7 @@ $searchInput.addEventListener('keypress', function (event) {
   }
 });
 
-$movieResults.addEventListener('click', event => {
+$movieSearchResults.addEventListener('click', event => {
   if (event.target.tagName === 'I') {
     event.target.classList.add('icon-yellow');
     const watchListMovie = {};
@@ -106,5 +108,11 @@ $movieResults.addEventListener('click', event => {
     watchListMovie.id = Number(event.target.closest('.movie').getAttribute('id'));
 
     data.watchlist.unshift(watchListMovie);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', event => {
+  for (let i = 0; i < data.watchlist.length; i++) {
+    $movieWatchlistResults.append(renderMovie(data.watchlist[i]));
   }
 });
