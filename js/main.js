@@ -40,13 +40,6 @@ function renderMovie(results) {
 
   const $moviePoster = document.createElement('img');
   $moviePoster.classList.add('movie-poster');
-  if (results.poster_path === null) {
-    $moviePoster.setAttribute('src', 'https://placehold.jp/DDDDDD/ffffff/500x750.jpg?text=No%20image%20available');
-    $moviePoster.setAttribute('alt', 'No image available');
-  } else {
-    $moviePoster.setAttribute('src', `${IMG_URL}${results.poster_path}`);
-    $moviePoster.setAttribute('alt', `Movie poster of ${results.title}`);
-  }
 
   const $bookmarkIcon = document.createElement('i');
   $bookmarkIcon.classList.add('fa-solid', 'fa-bookmark');
@@ -54,6 +47,17 @@ function renderMovie(results) {
     if (data.watchlist[i].id === results.id) {
       $bookmarkIcon.classList.add('icon-yellow');
     }
+  }
+
+  if ($bookmarkIcon.classList.contains('icon-yellow')) {
+    $moviePoster.setAttribute('src', results.poster_path);
+    $moviePoster.setAttribute('alt', 'No image available');
+  } else if (results.poster_path === null) {
+    $moviePoster.setAttribute('src', 'https://placehold.jp/DDDDDD/ffffff/500x750.jpg?text=No%20image%20available');
+    $moviePoster.setAttribute('alt', 'No image available');
+  } else {
+    $moviePoster.setAttribute('src', `${IMG_URL}${results.poster_path}`);
+    $moviePoster.setAttribute('alt', `Movie poster of ${results.title}`);
   }
 
   const $movieTitle = document.createElement('h3');
