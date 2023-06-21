@@ -24,9 +24,9 @@
       <div class="column-full space-between align-center">
         <a href="#" class="logo"><span>M</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></a>
         <ul class="row">
-          <li><a href="#">Search</a></li>
+          <li><a href="#" id="navSearch">Search</a></li>
           <li><a href="#">Upcoming</a></li>
-          <li><a href="#">Watchlist</a></li>
+          <li><a href="#" id="navWatchlist">Watchlist</a></li>
         </ul>
       </div>
     </nav>
@@ -48,7 +48,7 @@
   </main>
 
   <!-- Watchlist view -->
-  <section class="container" data-view="watchlist-view">
+  <section class="container hide" data-view="watchlist-view">
 
     <div class="row empty-watchlist-message text-center">
       <div class="column-full empty-watchlist-padding">
@@ -62,7 +62,7 @@
         <h2>Your Watchlist</h2>
       </div>
     </div>
-    <div class="movie-watchlist grid">
+    <div class="movie-watchlist grid hide">
     </div>
 
   </section>

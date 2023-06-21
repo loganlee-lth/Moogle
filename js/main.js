@@ -3,12 +3,14 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const SEARCH_URL = `${BASE_URL}/search/movie?${API_KEY}&include_adult=false&language=en-US&query=`;
 
-// Views
-// const $searchView = document.querySelector('[data-view="search-view"]');
-// const $watchlistView = document.querySelector('[data-view="watchlist-view"]');
-
 // Application state
 const resultPage = 1;
+
+// Views
+const $searchView = document.querySelector('[data-view="search-view"]');
+const $watchlistView = document.querySelector('[data-view="watchlist-view"]');
+
+const $navbar = document.querySelector('nav');
 
 // Search button
 const $searchBtn = document.querySelector('.search-button');
@@ -19,8 +21,8 @@ const $movieSearchResults = document.querySelector('.movie-results');
 const $movieWatchlistResults = document.querySelector('.movie-watchlist');
 
 // Watchlist
-// const $emptyWatchlistMessage = document.querySelector('.empty-watchlist');
-// const $watchlistHeader = document.querySelector('.watchlist-header');
+const $emptyWatchlistMessage = document.querySelector('.empty-watchlist-message');
+const $watchlistHeader = document.querySelector('.watchlist-header');
 
 function searchMovies() {
   const xhr = new XMLHttpRequest();
@@ -95,6 +97,8 @@ function renderMovie(results) {
   return $movie;
 }
 
+$navbar.addEventListener('click', viewSwap);
+
 $searchBtn.addEventListener('click', () => {
   searchMovies();
   $movieSearchResults.classList.remove('hide');
@@ -123,28 +127,28 @@ $movieSearchResults.addEventListener('click', event => {
   }
 });
 
-// function viewSwap(event) {
-//   if (event.target.matches('#navSearch')) {
-//     $searchView.classList.remove('hide');
-//     $watchlistView.classList.add('hide');
-//   } else if (event.target.matches('#navWatchlist')) {
-//     toggleEmptyWatchlist();
-//     $searchView.classList.add('hide');
-//     $watchlistView.classList.remove('hide');
-//   }
-// }
+function viewSwap(event) {
+  if (event.target.matches('#navSearch')) {
+    $searchView.classList.remove('hide');
+    $watchlistView.classList.add('hide');
+  } else if (event.target.matches('#navWatchlist')) {
+    toggleEmptyWatchlist();
+    $searchView.classList.add('hide');
+    $watchlistView.classList.remove('hide');
+  }
+}
 
-// function toggleEmptyWatchlist() {
-//   if (data.watchlist.length === 0) {
-//     $emptyWatchlistMessage.classList.remove('hide');
-//     $movieWatchlistResults.classList.add('hide');
-//     $watchlistHeader.classList.add('hide');
-//   } else {
-//     $emptyWatchlistMessage.classList.add('hide');
-//     $movieWatchlistResults.classList.remove('hide');
-//     $watchlistHeader.classList.remove('hide');
-//   }
-// }
+function toggleEmptyWatchlist() {
+  if (data.watchlist.length === 0) {
+    $emptyWatchlistMessage.classList.remove('hide');
+    $movieWatchlistResults.classList.add('hide');
+    $watchlistHeader.classList.add('hide');
+  } else {
+    $emptyWatchlistMessage.classList.add('hide');
+    $movieWatchlistResults.classList.remove('hide');
+    $watchlistHeader.classList.remove('hide');
+  }
+}
 
 document.addEventListener('DOMContentLoaded', event => {
   for (let i = 0; i < data.watchlist.length; i++) {
