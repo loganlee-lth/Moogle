@@ -79,8 +79,9 @@ ul a {
   font-size: 1rem;
 }
 
-/* Movie container */
-.movie-results {
+/* Movie container (search and watchlist view) */
+.movie-results,
+.movie-watchlist {
   border: 2px solid #333;
   border-radius: 5px;
   padding: 1rem;
@@ -150,23 +151,13 @@ ul a {
   padding-bottom: 1rem;
 }
 
+.watchlist-header {
+  padding-bottom: 2rem;
+}
+
 .watchlist-header h2 {
   color: #fff;
 }
-
-/*
-
-.watchlist-view .column-full {
-  padding-bottom: 1rem;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.empty-watchlist-padding {
-  padding: 0 1rem;
-} */
 
 @media screen and (min-width: 768px) {
   .grid {
