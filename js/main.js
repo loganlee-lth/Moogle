@@ -3,6 +3,10 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const SEARCH_URL = `${BASE_URL}/search/movie?${API_KEY}&include_adult=false&language=en-US&query=`;
 
+// Views
+// const $searchView = document.querySelector('[data-view="search-view"]');
+// const $watchlistView = document.querySelector('[data-view="watchlist-view"]');
+
 // Application state
 const resultPage = 1;
 
@@ -118,6 +122,17 @@ $movieSearchResults.addEventListener('click', event => {
     data.watchlist.unshift(watchListMovie);
   }
 });
+
+// function viewSwap(event) {
+//   if (event.target.matches('#navSearch')) {
+//     $searchView.classList.remove('hide');
+//     $watchlistView.classList.add('hide');
+//   } else if (event.target.matches('#navWatchlist')) {
+//     toggleEmptyWatchlist();
+//     $searchView.classList.add('hide');
+//     $watchlistView.classList.remove('hide');
+//   }
+// }
 
 // function toggleEmptyWatchlist() {
 //   if (data.watchlist.length === 0) {
