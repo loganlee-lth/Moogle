@@ -42,7 +42,7 @@ function searchMovies() {
 }
 
 // Render movie function
-function renderMovie(results) {
+function renderMovie(results, view) {
 
   const $movie = document.createElement('div');
   $movie.classList.add('movie');
@@ -50,24 +50,22 @@ function renderMovie(results) {
 
   const $moviePoster = document.createElement('img');
   $moviePoster.classList.add('movie-poster');
-
   const $bookmarkIcon = document.createElement('i');
   $bookmarkIcon.classList.add('fa-solid', 'fa-bookmark');
-  for (let i = 0; i < data.watchlist.length; i++) {
-    if (data.watchlist[i].id === results.id) {
-      $bookmarkIcon.classList.add('icon-yellow');
-    }
-  }
 
-  if ($bookmarkIcon.classList.contains('icon-yellow')) {
-    $moviePoster.setAttribute('src', results.poster_path);
-    $moviePoster.setAttribute('alt', 'No image available');
-  } else if (results.poster_path === null) {
+  if (results.poster_path === null) {
     $moviePoster.setAttribute('src', 'https://placehold.jp/DDDDDD/ffffff/500x750.jpg?text=No%20image%20available');
     $moviePoster.setAttribute('alt', 'No image available');
   } else {
     $moviePoster.setAttribute('src', `${IMG_URL}${results.poster_path}`);
     $moviePoster.setAttribute('alt', `Movie poster of ${results.title}`);
+  }
+  for (let i = 0; i < data.watchlist.length; i++) {
+    if (data.watchlist[i].id === results.id) {
+      $moviePoster.setAttribute('src', data.watchlist[i].poster_path);
+      $moviePoster.setAttribute('alt', data.watchlist[i].alt);
+      $bookmarkIcon.classList.add('icon-yellow');
+    }
   }
 
   const $movieTitle = document.createElement('h3');
@@ -118,6 +116,7 @@ $movieSearchResults.addEventListener('click', event => {
     event.target.classList.add('icon-yellow');
     const watchListMovie = {};
     watchListMovie.poster_path = event.target.closest('.movie').querySelector('img').src;
+    watchListMovie.alt = event.target.closest('.movie').querySelector('img').alt;
     watchListMovie.title = event.target.closest('.movie').querySelector('.movie-title').textContent;
     watchListMovie.vote_average = event.target.closest('.movie').querySelector('.movie-rating').textContent;
     watchListMovie.release_date = event.target.closest('.movie').querySelector('.movie-year').textContent;
