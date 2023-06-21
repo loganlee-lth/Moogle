@@ -50,7 +50,6 @@ ul a {
 
 /* Search bar */
 .search-bar {
-  text-align: center;
   position: relative;
   padding-bottom: 4rem;
 }
@@ -125,12 +124,12 @@ ul a {
   line-height: 1.5;
 }
 
-h3,
-p {
+.movie h3,
+.movie p {
   color: #fff;
 }
 
-h3 {
+.movie h3 {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -140,6 +139,34 @@ h3 {
   color: #fcf55f;
   padding-right: 0.25rem;
 }
+
+/* Watchlist view */
+.empty-watchlist h2,
+.empty-watchlist p {
+  color: #fff;
+}
+
+.empty-watchlist h2 {
+  padding-bottom: 1rem;
+}
+
+.watchlist-header h2 {
+  color: #fff;
+}
+
+/*
+
+.watchlist-view .column-full {
+  padding-bottom: 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.empty-watchlist-padding {
+  padding: 0 1rem;
+} */
 
 @media screen and (min-width: 768px) {
   .grid {

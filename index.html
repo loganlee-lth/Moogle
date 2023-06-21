@@ -34,9 +34,9 @@
   </header>
 
   <!-- Search view -->
-  <main class="container" data-view="search-bar">
+  <main class="container" data-view="search-view">
 
-    <div class="search-bar row">
+    <div class="row search-bar text-center">
       <div class="column-full">
         <input type="text" class="search-input" placeholder="Search movies">
         <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
@@ -46,6 +46,26 @@
     </div>
 
   </main>
+
+  <!-- Watchlist view -->
+  <section class="container" data-view="watchlist-view">
+
+    <div class="row empty-watchlist text-center">
+      <div class="column-full empty-watchlist-padding">
+        <h2>Your Watchlist is empty</h2>
+        <p>Add movies to your Watchlist to keep track of what you want to watch.</p>
+      </div>
+    </div>
+
+    <div class="row watchlist-header text-center">
+      <div class="column-full">
+        <h2>Your Watchlist</h2>
+      </div>
+    </div>
+    <div class="movie-watchlist grid">
+    </div>
+
+  </section>
 
 
   <script src="js/data.js"></script>
