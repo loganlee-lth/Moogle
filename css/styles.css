@@ -141,12 +141,12 @@ ul a {
 }
 
 /* Watchlist view */
-.empty-watchlist h2,
-.empty-watchlist p {
+.empty-watchlist-message h2,
+.empty-watchlist-message p {
   color: #fff;
 }
 
-.empty-watchlist h2 {
+.empty-watchlist-message h2 {
   padding-bottom: 1rem;
 }
 

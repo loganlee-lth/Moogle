@@ -14,6 +14,10 @@ const $searchInput = document.querySelector('.search-input');
 const $movieSearchResults = document.querySelector('.movie-results');
 const $movieWatchlistResults = document.querySelector('.movie-watchlist');
 
+// Watchlist
+// const $emptyWatchlistMessage = document.querySelector('.empty-watchlist');
+// const $watchlistHeader = document.querySelector('.watchlist-header');
+
 function searchMovies() {
   const xhr = new XMLHttpRequest();
   const searchTitle = $searchInput.value.trim();
@@ -114,6 +118,18 @@ $movieSearchResults.addEventListener('click', event => {
     data.watchlist.unshift(watchListMovie);
   }
 });
+
+// function toggleEmptyWatchlist() {
+//   if (data.watchlist.length === 0) {
+//     $emptyWatchlistMessage.classList.remove('hide');
+//     $movieWatchlistResults.classList.add('hide');
+//     $watchlistHeader.classList.add('hide');
+//   } else {
+//     $emptyWatchlistMessage.classList.add('hide');
+//     $movieWatchlistResults.classList.remove('hide');
+//     $watchlistHeader.classList.remove('hide');
+//   }
+// }
 
 document.addEventListener('DOMContentLoaded', event => {
   for (let i = 0; i < data.watchlist.length; i++) {
