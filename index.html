@@ -24,9 +24,9 @@
       <div class="column-full space-between align-center">
         <a href="#" class="logo"><span>M</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></a>
         <ul class="row">
-          <li><a href="#">Search</a></li>
+          <li><a href="#" id="navSearch">Search</a></li>
           <li><a href="#">Upcoming</a></li>
-          <li><a href="#">Watchlist</a></li>
+          <li><a href="#" id="navWatchlist">Watchlist</a></li>
         </ul>
       </div>
     </nav>
@@ -34,9 +34,9 @@
   </header>
 
   <!-- Search view -->
-  <main class="container" data-view="search-bar">
+  <main class="container" data-view="search-view">
 
-    <div class="search-bar row">
+    <div class="row search-bar text-center">
       <div class="column-full">
         <input type="text" class="search-input" placeholder="Search movies">
         <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
@@ -46,6 +46,26 @@
     </div>
 
   </main>
+
+  <!-- Watchlist view -->
+  <section class="container hide" data-view="watchlist-view">
+
+    <div class="row empty-watchlist-message text-center">
+      <div class="column-full empty-watchlist-padding">
+        <h2>Your Watchlist is empty</h2>
+        <p>Add movies to your Watchlist to keep track of what you want to watch.</p>
+      </div>
+    </div>
+
+    <div class="row watchlist-header text-center hide">
+      <div class="column-full">
+        <h2>Your Watchlist</h2>
+      </div>
+    </div>
+    <div class="movie-watchlist grid hide">
+    </div>
+
+  </section>
 
 
   <script src="js/data.js"></script>

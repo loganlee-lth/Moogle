@@ -50,7 +50,6 @@ ul a {
 
 /* Search bar */
 .search-bar {
-  text-align: center;
   position: relative;
   padding-bottom: 4rem;
 }
@@ -80,8 +79,9 @@ ul a {
   font-size: 1rem;
 }
 
-/* Movie container */
-.movie-results {
+/* Movie container (search and watchlist view) */
+.movie-results,
+.movie-watchlist {
   border: 2px solid #333;
   border-radius: 5px;
   padding: 1rem;
@@ -110,6 +110,10 @@ ul a {
   color: yellow;
 }
 
+.fa-bookmark:hover {
+  transform: scale(1.15);
+}
+
 .movie-poster {
   max-width: 100%;
   width: 100%;
@@ -121,12 +125,12 @@ ul a {
   line-height: 1.5;
 }
 
-h3,
-p {
+.movie h3,
+.movie p {
   color: #fff;
 }
 
-h3 {
+.movie h3 {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -135,6 +139,24 @@ h3 {
 .fa-star {
   color: #fcf55f;
   padding-right: 0.25rem;
+}
+
+/* Watchlist view */
+.empty-watchlist-message h2,
+.empty-watchlist-message p {
+  color: #fff;
+}
+
+.empty-watchlist-message h2 {
+  padding-bottom: 1rem;
+}
+
+.watchlist-header {
+  padding-bottom: 2rem;
+}
+
+.watchlist-header h2 {
+  color: #fff;
 }
 
 @media screen and (min-width: 768px) {
