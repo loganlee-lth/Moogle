@@ -50,26 +50,26 @@ function searchMovies() {
 }
 
 // Render movie function
-function renderMovie(results, view) {
+function renderMovie(result) {
 
   const $movie = document.createElement('div');
   $movie.classList.add('movie');
-  $movie.setAttribute('data-movie-id', results.id);
+  $movie.setAttribute('data-movie-id', result.id);
 
   const $moviePoster = document.createElement('img');
   $moviePoster.classList.add('movie-poster');
   const $bookmarkIcon = document.createElement('i');
   $bookmarkIcon.classList.add('fa-solid', 'fa-bookmark');
 
-  if (results.poster_path === null) {
+  if (result.poster_path === null) {
     $moviePoster.setAttribute('src', 'https://placehold.jp/DDDDDD/ffffff/500x750.jpg?text=No%20image%20available');
     $moviePoster.setAttribute('alt', 'No image available');
   } else {
-    $moviePoster.setAttribute('src', `${IMG_URL}${results.poster_path}`);
-    $moviePoster.setAttribute('alt', `Movie poster of ${results.title}`);
+    $moviePoster.setAttribute('src', `${IMG_URL}${result.poster_path}`);
+    $moviePoster.setAttribute('alt', `Movie poster of ${result.title}`);
   }
   for (let i = 0; i < data.watchlist.length; i++) {
-    if (data.watchlist[i].id === results.id) {
+    if (data.watchlist[i].id === result.id) {
       $moviePoster.setAttribute('src', data.watchlist[i].poster_path);
       $moviePoster.setAttribute('alt', data.watchlist[i].alt);
       $bookmarkIcon.classList.add('icon-yellow');
@@ -78,7 +78,7 @@ function renderMovie(results, view) {
 
   const $movieTitle = document.createElement('h3');
   $movieTitle.classList.add('movie-title');
-  $movieTitle.textContent = results.title;
+  $movieTitle.textContent = result.title;
   const $movieInfo = document.createElement('div');
   $movieInfo.classList.add('movie-info', 'row');
   const $movieInfoCol = document.createElement('div');
@@ -87,10 +87,10 @@ function renderMovie(results, view) {
   $movieRating.classList.add('movie-rating');
   const $ratingIcon = document.createElement('i');
   $ratingIcon.classList.add('fa-solid', 'fa-star');
-  $movieRating.append($ratingIcon, Number(results.vote_average).toFixed(2));
+  $movieRating.append($ratingIcon, Number(result.vote_average).toFixed(2));
   const $movieYear = document.createElement('p');
   $movieYear.classList.add('movie-year');
-  $movieYear.textContent = results.release_date.substring(0, 4);
+  $movieYear.textContent = result.release_date.substring(0, 4);
 
   $movie.append($moviePoster);
   $movie.append($bookmarkIcon);
