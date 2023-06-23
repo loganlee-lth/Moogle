@@ -10,6 +10,8 @@ const resultPage = 1;
 const $searchView = document.querySelector('[data-view="search-view"]');
 const $watchlistView = document.querySelector('[data-view="watchlist-view"]');
 
+// Header
+// const $header = document.querySelector('header');
 const $navbar = document.querySelector('nav');
 
 // Search button
@@ -95,6 +97,29 @@ function renderMovie(results, view) {
   return $movie;
 }
 
+function viewSwap(event) {
+  if (event.target.matches('#navSearch')) {
+    $searchView.classList.remove('hide');
+    $watchlistView.classList.add('hide');
+  } else if (event.target.matches('#navWatchlist')) {
+    toggleEmptyWatchlist();
+    $searchView.classList.add('hide');
+    $watchlistView.classList.remove('hide');
+  }
+}
+
+function toggleEmptyWatchlist() {
+  if (data.watchlist.length === 0) {
+    $emptyWatchlistMessage.classList.remove('hide');
+    $movieWatchlistResults.classList.add('hide');
+    $watchlistHeader.classList.add('hide');
+  } else {
+    $emptyWatchlistMessage.classList.add('hide');
+    $movieWatchlistResults.classList.remove('hide');
+    $watchlistHeader.classList.remove('hide');
+  }
+}
+
 $navbar.addEventListener('click', viewSwap);
 
 $searchBtn.addEventListener('click', () => {
@@ -127,28 +152,13 @@ $movieSearchResults.addEventListener('click', event => {
   }
 });
 
-function viewSwap(event) {
-  if (event.target.matches('#navSearch')) {
-    $searchView.classList.remove('hide');
-    $watchlistView.classList.add('hide');
-  } else if (event.target.matches('#navWatchlist')) {
-    toggleEmptyWatchlist();
-    $searchView.classList.add('hide');
-    $watchlistView.classList.remove('hide');
-  }
-}
-
-function toggleEmptyWatchlist() {
-  if (data.watchlist.length === 0) {
-    $emptyWatchlistMessage.classList.remove('hide');
-    $movieWatchlistResults.classList.add('hide');
-    $watchlistHeader.classList.add('hide');
-  } else {
-    $emptyWatchlistMessage.classList.add('hide');
-    $movieWatchlistResults.classList.remove('hide');
-    $watchlistHeader.classList.remove('hide');
-  }
-}
+// $movieWatchlistResults.addEventListener('click', event => {
+//   if (event.target.tagName === 'I') {
+//     $header.classList.remove('sticky');
+//     $modal.classList.remove('hide');
+//     data.clickedMovieId = Number(event.target.closest('.movie').getAttribute('data-movie-id'));
+//   }
+// });
 
 document.addEventListener('DOMContentLoaded', event => {
   for (let i = 0; i < data.watchlist.length; i++) {
