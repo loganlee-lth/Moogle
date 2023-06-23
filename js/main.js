@@ -29,8 +29,9 @@ const $watchlistHeader = document.querySelector('.watchlist-header');
 // Modal
 const $modal = document.querySelector('#background');
 const $cancelButton = document.querySelector('#cancel-button');
-// const $deleteButton = document.querySelector('#delete-button');
+const $deleteButton = document.querySelector('#delete-button');
 
+// Search function
 function searchMovies() {
   const xhr = new XMLHttpRequest();
   const searchTitle = $searchInput.value.trim();
@@ -53,7 +54,7 @@ function renderMovie(results, view) {
 
   const $movie = document.createElement('div');
   $movie.classList.add('movie');
-  $movie.setAttribute('id', results.id);
+  $movie.setAttribute('data-movie-id', results.id);
 
   const $moviePoster = document.createElement('img');
   $moviePoster.classList.add('movie-poster');
@@ -102,6 +103,7 @@ function renderMovie(results, view) {
   return $movie;
 }
 
+// View swap
 function viewSwap(event) {
   if (event.target.matches('#navSearch')) {
     $searchView.classList.remove('hide');
@@ -113,6 +115,7 @@ function viewSwap(event) {
   }
 }
 
+// Toggle empty watchlist message and watchlist header
 function toggleEmptyWatchlist() {
   if (data.watchlist.length === 0) {
     $emptyWatchlistMessage.classList.remove('hide');
@@ -127,6 +130,7 @@ function toggleEmptyWatchlist() {
 
 $navbar.addEventListener('click', viewSwap);
 
+// Search view
 $searchBtn.addEventListener('click', () => {
   searchMovies();
   $movieSearchResults.classList.remove('hide');
@@ -150,13 +154,14 @@ $movieSearchResults.addEventListener('click', event => {
     watchListMovie.title = event.target.closest('.movie').querySelector('.movie-title').textContent;
     watchListMovie.vote_average = event.target.closest('.movie').querySelector('.movie-rating').textContent;
     watchListMovie.release_date = event.target.closest('.movie').querySelector('.movie-year').textContent;
-    watchListMovie.id = Number(event.target.closest('.movie').getAttribute('id'));
+    watchListMovie.id = Number(event.target.closest('.movie').getAttribute('data-movie-id'));
 
     data.watchlist.unshift(watchListMovie);
     $movieWatchlistResults.prepend(renderMovie(watchListMovie));
   }
 });
 
+// Watchlist view
 $movieWatchlistResults.addEventListener('click', event => {
   if (event.target.tagName === 'I') {
     $header.classList.remove('sticky');
@@ -171,6 +176,28 @@ $cancelButton.addEventListener('click', () => {
   data.clickedMovieId = null;
 });
 
+$deleteButton.addEventListener('click', () => {
+  for (let i = 0; i < data.watchlist.length; i++) {
+    if (data.watchlist[i].id === data.clickedMovieId) {
+      data.watchlist.splice(i, 1);
+      break;
+    }
+  }
+
+  const $deletedMovie = $movieWatchlistResults.querySelector(`[data-movie-id="${data.clickedMovieId}"]`);
+  $deletedMovie.remove();
+  if (typeof ($movieSearchResults.querySelector(`[data-movie-id="${data.clickedMovieId}"]`)) !== 'undefined' && $movieSearchResults.querySelector(`[data-movie-id="${data.clickedMovieId}"]`) !== null) {
+    const $unfavoriteMovie = $movieSearchResults.querySelector(`[data-movie-id="${data.clickedMovieId}"]`);
+    $unfavoriteMovie.querySelector('i').classList.remove('icon-yellow');
+  }
+
+  toggleEmptyWatchlist();
+  $header.classList.add('sticky');
+  $modal.classList.add('hide');
+  data.clickedMovieId = null;
+});
+
+// DOMContentLoaded
 document.addEventListener('DOMContentLoaded', event => {
   for (let i = 0; i < data.watchlist.length; i++) {
     $movieWatchlistResults.append(renderMovie(data.watchlist[i]));
