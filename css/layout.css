@@ -2,6 +2,10 @@
   display: none !important;
 }
 
+img:hover {
+  filter: brightness(65%);
+}
+
 .container {
   max-width: 1100px;
   margin: 0 auto;
