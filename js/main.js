@@ -11,7 +11,7 @@ const $searchView = document.querySelector('[data-view="search-view"]');
 const $watchlistView = document.querySelector('[data-view="watchlist-view"]');
 
 // Header
-// const $header = document.querySelector('header');
+const $header = document.querySelector('header');
 const $navbar = document.querySelector('nav');
 
 // Search button
@@ -25,6 +25,11 @@ const $movieWatchlistResults = document.querySelector('.movie-watchlist');
 // Watchlist
 const $emptyWatchlistMessage = document.querySelector('.empty-watchlist-message');
 const $watchlistHeader = document.querySelector('.watchlist-header');
+
+// Modal
+const $modal = document.querySelector('#background');
+const $cancelButton = document.querySelector('#cancel-button');
+// const $deleteButton = document.querySelector('#delete-button');
 
 function searchMovies() {
   const xhr = new XMLHttpRequest();
@@ -152,13 +157,19 @@ $movieSearchResults.addEventListener('click', event => {
   }
 });
 
-// $movieWatchlistResults.addEventListener('click', event => {
-//   if (event.target.tagName === 'I') {
-//     $header.classList.remove('sticky');
-//     $modal.classList.remove('hide');
-//     data.clickedMovieId = Number(event.target.closest('.movie').getAttribute('data-movie-id'));
-//   }
-// });
+$movieWatchlistResults.addEventListener('click', event => {
+  if (event.target.tagName === 'I') {
+    $header.classList.remove('sticky');
+    $modal.classList.remove('hide');
+    data.clickedMovieId = Number(event.target.closest('.movie').getAttribute('data-movie-id'));
+  }
+});
+
+$cancelButton.addEventListener('click', () => {
+  $header.classList.add('sticky');
+  $modal.classList.add('hide');
+  data.clickedMovieId = null;
+});
 
 document.addEventListener('DOMContentLoaded', event => {
   for (let i = 0; i < data.watchlist.length; i++) {
