@@ -159,8 +159,118 @@ ul a {
   color: #fff;
 }
 
+/* Modal */
+
+.background {
+  display: flex;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: #1f1f23;
+  height: 7rem;
+  width: 18rem;
+  border-radius: 0.3rem;
+}
+
+.modal p {
+  color: #fff;
+  font-size: 0.8rem;
+  padding-top: 1.3rem;
+  padding-bottom: 2.9rem;
+  padding-left: 1.5rem;
+}
+
+#cancel-button,
+#delete-button {
+  text-transform: uppercase;
+  color: #136bb2;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+
+#cancel-button {
+  margin-right: 1.8rem;
+}
+
+#delete-button {
+  margin-right: 1.5rem;
+}
+
+@media screen and (min-width: 520px) {
+  .modal {
+    height: 8rem;
+    width: 25rem;
+  }
+
+  .modal p {
+    color: #fff;
+    font-size: 1rem;
+    padding-top: 1.3rem;
+    padding-bottom: 2.9rem;
+    padding-left: 1.5rem;
+  }
+
+  #cancel-button,
+  #delete-button {
+    text-transform: uppercase;
+    color: #136bb2;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+
+  #cancel-button {
+    margin-right: 1.8rem;
+  }
+
+  #delete-button {
+    margin-right: 1.5rem;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .grid {
     grid-template-columns: repeat(auto-fit, minmax(10rem, 0.3333fr));
+  }
+
+  .modal {
+    height: 8rem;
+    width: 30rem;
+  }
+
+  .modal p {
+    color: #fff;
+    font-size: 1.15rem;
+    padding-top: 1.3rem;
+    padding-bottom: 2.9rem;
+    padding-left: 1.5rem;
+  }
+
+  #cancel-button,
+  #delete-button {
+    text-transform: uppercase;
+    color: #136bb2;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  #cancel-button {
+    margin-right: 1.8rem;
+  }
+
+  #delete-button {
+    margin-right: 1.5rem;
   }
 }
