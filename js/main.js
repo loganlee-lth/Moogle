@@ -1,4 +1,4 @@
-const API_KEY = 'api_key=60a54b0f57e84cfed7f03d9b54cc4177';
+const API_KEY = 'api_key=aee2516ca6612aadf15632f702d7bf65';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const SEARCH_URL = `${BASE_URL}/search/movie?${API_KEY}&include_adult=false&language=en-US&query=`;
@@ -8,6 +8,7 @@ const resultPage = 1;
 
 // Views
 const $searchView = document.querySelector('[data-view="search-view"]');
+const $upcomingView = document.querySelector('[data-view="upcoming-view"]');
 const $watchlistView = document.querySelector('[data-view="watchlist-view"]');
 
 // Header
@@ -20,7 +21,11 @@ const $searchInput = document.querySelector('.search-input');
 
 // Movie containers
 const $movieSearchResults = document.querySelector('.movie-results');
+const $movieUpcomingResults = document.querySelector('.movie-upcoming-list');
 const $movieWatchlistResults = document.querySelector('.movie-watchlist');
+
+// Upcoming
+const $upcomingListHeader = document.querySelector('.upcoming-list-header');
 
 // Watchlist
 const $emptyWatchlistMessage = document.querySelector('.empty-watchlist-message');
@@ -47,6 +52,21 @@ function searchMovies() {
     });
     xhr.send();
   }
+}
+
+// Search upcoming movies
+function searchUpcomingMovies() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.themoviedb.org/3/movie/upcoming?api_key=aee2516ca6612aadf15632f702d7bf65&language=en-US&page=1');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    const results = xhr.response.results;
+    $movieUpcomingResults.replaceChildren();
+    for (let i = 0; i < results.length; i++) {
+      $movieUpcomingResults.append(renderMovie(results[i]));
+    }
+  });
+  xhr.send(data);
 }
 
 // Render movie function
@@ -107,10 +127,19 @@ function renderMovie(result) {
 function viewSwap(event) {
   if (event.target.matches('#navSearch')) {
     $searchView.classList.remove('hide');
+    $upcomingView.classList.add('hide');
     $watchlistView.classList.add('hide');
+  } else if (event.target.matches('#navUpcoming')) {
+    $searchView.classList.add('hide');
+    $upcomingView.classList.remove('hide');
+    $watchlistView.classList.add('hide');
+    $upcomingListHeader.classList.remove('hide');
+    $movieUpcomingResults.classList.remove('hide');
+    searchUpcomingMovies();
   } else if (event.target.matches('#navWatchlist')) {
     toggleEmptyWatchlist();
     $searchView.classList.add('hide');
+    $upcomingView.classList.add('hide');
     $watchlistView.classList.remove('hide');
   }
 }
