@@ -1,7 +1,7 @@
 const API_KEY = 'api_key=aee2516ca6612aadf15632f702d7bf65';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
-const SEARCH_URL = `${BASE_URL}/search/movie?${API_KEY}&include_adult=false&language=en-US&query=`;
+const SEARCH_URL = `${BASE_URL}/search/movie?${API_KEY}&include_adult=false&language=en-US&region=us&query=`;
 
 // Application state
 const resultPage = 1;
@@ -57,7 +57,7 @@ function searchMovies() {
 // Search upcoming movies
 function searchUpcomingMovies() {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.themoviedb.org/3/movie/upcoming?api_key=aee2516ca6612aadf15632f702d7bf65&language=en-US&page=1');
+  xhr.open('GET', 'https://api.themoviedb.org/3/movie/upcoming?api_key=aee2516ca6612aadf15632f702d7bf65&language=en-US&page=1&region=us');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     const results = xhr.response.results;
