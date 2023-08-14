@@ -174,7 +174,8 @@ $searchInput.addEventListener('keypress', function (event) {
   }
 });
 
-$movieSearchResults.addEventListener('click', event => {
+// Bookmark functionality
+function bookmark(event) {
   if (event.target.tagName === 'I') {
     event.target.classList.add('icon-yellow');
     const watchListMovie = {};
@@ -188,7 +189,10 @@ $movieSearchResults.addEventListener('click', event => {
     data.watchlist.unshift(watchListMovie);
     $movieWatchlistResults.prepend(renderMovie(watchListMovie));
   }
-});
+}
+
+$movieSearchResults.addEventListener('click', bookmark);
+$movieUpcomingResults.addEventListener('click', bookmark);
 
 // Watchlist view
 $movieWatchlistResults.addEventListener('click', event => {
