@@ -176,7 +176,7 @@ $searchInput.addEventListener('keypress', function (event) {
 
 // Bookmark functionality
 function bookmark(event) {
-  if (event.target.tagName === 'I') {
+  if (event.target.tagName === 'I' && !event.target.classList.contains('icon-yellow')) {
     event.target.classList.add('icon-yellow');
     const watchListMovie = {};
     watchListMovie.poster_path = event.target.closest('.movie').querySelector('img').src;
