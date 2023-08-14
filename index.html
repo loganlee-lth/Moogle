@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
   <!-- Header (navbar) -->
@@ -22,10 +24,11 @@
 
     <nav class="row">
       <div class="column-full space-between align-center">
-        <a href="#" class="logo"><span>M</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></a>
+        <a href="#"
+          class="logo"><span>M</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></a>
         <ul class="row">
           <li><a href="#" id="navSearch">Search</a></li>
-          <li><a href="#">Upcoming</a></li>
+          <li><a href="#" id="navUpcoming">Upcoming</a></li>
           <li><a href="#" id="navWatchlist">Watchlist</a></li>
         </ul>
       </div>
@@ -46,6 +49,19 @@
     </div>
 
   </main>
+
+  <!-- Upcoming list view -->
+  <section class="container hide" data-view="upcoming-view">
+
+    <div class="row upcoming-list-header text-center hide">
+      <div class="column-full">
+        <h2>Upcoming Movies</h2>
+      </div>
+    </div>
+    <div class="movie-upcoming-list grid hide">
+    </div>
+
+  </section>
 
   <!-- Watchlist view -->
   <section class="container hide" data-view="watchlist-view">
@@ -88,4 +104,5 @@
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>

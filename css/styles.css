@@ -81,6 +81,7 @@ ul a {
 
 /* Movie container (search and watchlist view) */
 .movie-results,
+.movie-upcoming-list,
 .movie-watchlist {
   border: 2px solid #333;
   border-radius: 5px;
@@ -151,10 +152,12 @@ ul a {
   padding-bottom: 1rem;
 }
 
+.upcoming-list-header,
 .watchlist-header {
   padding-bottom: 2rem;
 }
 
+.upcoming-list-header h2,
 .watchlist-header h2 {
   color: #fff;
 }

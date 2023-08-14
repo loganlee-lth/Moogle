@@ -27,7 +27,7 @@
       "multi-line"
     ],
     "no-console": [
-      "error",
+      "off",
       {
         "allow": [
           "warn",
