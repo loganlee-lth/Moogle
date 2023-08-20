@@ -35,6 +35,7 @@ const $watchlistHeader = document.querySelector('.watchlist-header');
 
 // Movie details
 const $movieDetails = document.querySelector('#movie-details');
+const $movieTrailer = document.querySelector('#movie-trailer');
 const $closeButton = document.querySelector('.close-button');
 
 // Modal
@@ -187,7 +188,7 @@ $searchInput.addEventListener('keypress', function (event) {
   }
 });
 
-// Bookmark functionality
+// Bookmark and movie details
 function movieClickHandler(event) {
   if (event.target.tagName === 'I' && !event.target.classList.contains('icon-yellow')) {
     event.target.classList.add('icon-yellow');
@@ -208,7 +209,9 @@ function movieClickHandler(event) {
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
       const response = xhr.response;
+      console.log(response);
       $movieDetails.replaceChildren();
+      $movieTrailer.replaceChildren();
       $searchView.classList.add('hide');
       $upcomingView.classList.add('hide');
       $watchlistView.classList.add('hide');
@@ -282,6 +285,18 @@ function renderMovieDetails(response) {
     $genre.textContent = $genre.textContent.slice(0, -2);
   }
 
+  if (response.videos.results.length > 0) {
+    const trailerKeys = response.videos.results.filter(video => video.name.toLowerCase().includes('trailer')).map(video => video.key);
+    const $iframe = document.createElement('iframe');
+    $iframe.width = '1800';
+    $iframe.height = '650';
+    $iframe.src = `https://www.youtube.com/embed/${trailerKeys[0]}`;
+    $iframe.frameborder = '0';
+    $iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    $iframe.allowFullscreen = true;
+    $movieTrailer.append($iframe);
+  }
+
   $firstColumn.append($moviePoster);
   $secondColumn.append($movieTitle);
   $secondColumn.append($labels);
@@ -326,6 +341,7 @@ $movieWatchlistResults.addEventListener('click', event => {
 });
 
 $closeButton.addEventListener('click', event => {
+  $movieTrailer.replaceChildren();
   $detailsView.classList.add('hide');
   if (data.view === 'search') {
     $searchView.classList.remove('hide');
