@@ -1,7 +1,8 @@
 /* exported data */
 var data = {
   watchlist: [],
-  clickedMovieId: null
+  clickedMovieId: null,
+  view: 'search'
 };
 
 window.addEventListener('beforeunload', event => {

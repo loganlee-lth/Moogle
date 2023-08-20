@@ -208,6 +208,58 @@ ul a {
   margin-right: 1.5rem;
 }
 
+.details-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.details-poster {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.details-column {
+  padding-left: 2rem;
+}
+
+.details-container h1,
+.details-container h2 {
+  color: white;
+}
+
+.details-container h1 {
+  font-size: 4.5rem;
+}
+
+.details-labels {
+  color: #f4b400;
+}
+
+.details-container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.details-container p {
+  color: #87888d;
+  margin-bottom: 2rem;
+}
+
+.close-details {
+  margin-bottom: 1rem;
+}
+
+.close-button {
+  color: white;
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
 @media screen and (min-width: 520px) {
   .modal {
     height: 8rem;

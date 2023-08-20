@@ -2,7 +2,7 @@
   display: none !important;
 }
 
-img:hover {
+.movie-poster:hover {
   filter: brightness(65%);
 }
 
