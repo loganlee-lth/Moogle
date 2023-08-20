@@ -370,4 +370,5 @@ document.addEventListener('DOMContentLoaded', event => {
   for (let i = 0; i < data.watchlist.length; i++) {
     $movieWatchlistResults.append(renderMovie(data.watchlist[i]));
   }
+  data.view = 'search';
 });
