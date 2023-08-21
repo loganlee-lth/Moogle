@@ -2,7 +2,10 @@
 var data = {
   watchlist: [],
   clickedMovieId: null,
-  view: 'search'
+  view: 'search',
+  title: null,
+  currentPage: null,
+  totalPages: null
 };
 
 window.addEventListener('beforeunload', event => {
