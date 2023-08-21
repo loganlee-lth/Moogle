@@ -16,6 +16,10 @@
   display: flex;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .column-full {
   flex-basis: 100%;
 }

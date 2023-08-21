@@ -4,9 +4,6 @@ const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const DETAILS_URL = 'https://image.tmdb.org/t/p/original';
 const SEARCH_URL = `${BASE_URL}/search/movie?${API_KEY}&include_adult=false&language=en-US&region=us&query=`;
 
-// Application state
-const resultPage = 1;
-
 // Views
 const $searchView = document.querySelector('[data-view="search-view"]');
 const $upcomingView = document.querySelector('[data-view="upcoming-view"]');
@@ -26,6 +23,9 @@ const $movieSearchResults = document.querySelector('.movie-results');
 const $movieUpcomingResults = document.querySelector('.movie-upcoming-list');
 const $movieWatchlistResults = document.querySelector('.movie-watchlist');
 
+// Load more button
+const $loadMoreButton = document.querySelector('#load-more-button');
+
 // Upcoming
 const $upcomingListHeader = document.querySelector('.upcoming-list-header');
 
@@ -44,21 +44,23 @@ const $cancelButton = document.querySelector('#cancel-button');
 const $deleteButton = document.querySelector('#delete-button');
 
 // Search function
-function searchMovies() {
+function searchMovies(searchTitle, resultPage) {
   const xhr = new XMLHttpRequest();
-  const searchTitle = $searchInput.value.trim();
-  if (searchTitle) {
-    xhr.open('GET', `${SEARCH_URL}${searchTitle}&page=${resultPage}`);
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', function () {
-      const results = xhr.response.results;
-      $movieSearchResults.replaceChildren();
-      for (let i = 0; i < results.length; i++) {
-        $movieSearchResults.append(renderMovie(results[i]));
-      }
-    });
-    xhr.send();
-  }
+  xhr.open('GET', `${SEARCH_URL}${searchTitle}&page=${resultPage}`);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    const response = xhr.response;
+    data.totalPages = response.total_pages;
+    if (data.totalPages === data.currentPage) {
+      $loadMoreButton.classList.add('hide');
+    } else {
+      $loadMoreButton.classList.remove('hide');
+    }
+    for (let i = 0; i < response.results.length; i++) {
+      $movieSearchResults.append(renderMovie(response.results[i]));
+    }
+  });
+  xhr.send();
 }
 
 // Search upcoming movies
@@ -68,7 +70,6 @@ function searchUpcomingMovies() {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     const results = xhr.response.results;
-    console.log(results);
     $movieUpcomingResults.replaceChildren();
     for (let i = 0; i < results.length; i++) {
       $movieUpcomingResults.append(renderMovie(results[i]));
@@ -175,17 +176,27 @@ $navbar.addEventListener('click', viewSwap);
 
 // Search view
 $searchBtn.addEventListener('click', () => {
-  searchMovies();
-  $movieSearchResults.classList.remove('hide');
+  $movieSearchResults.replaceChildren();
+  data.currentPage = 1;
+  const searchTitle = $searchInput.value.trim();
+  if (searchTitle) {
+    data.title = searchTitle;
+    searchMovies(data.title, data.currentPage);
+    $movieSearchResults.classList.remove('hide');
+  }
   $searchInput.value = '';
   document.documentElement.scrollTop = 0;
 });
 
 $searchInput.addEventListener('keypress', function (event) {
   if (event.key === 'Enter') {
-    event.preventDefault();
     $searchBtn.click();
   }
+});
+
+$loadMoreButton.addEventListener('click', () => {
+  data.currentPage++;
+  searchMovies(data.title, data.currentPage);
 });
 
 // Bookmark and movie details
@@ -209,7 +220,6 @@ function movieClickHandler(event) {
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
       const response = xhr.response;
-      console.log(response);
       $movieDetails.replaceChildren();
       $movieTrailer.replaceChildren();
       $searchView.classList.add('hide');
