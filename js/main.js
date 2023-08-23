@@ -144,6 +144,7 @@ function renderMovie(result) {
 
 // View swap
 function viewSwap(event) {
+  $movieTrailer.replaceChildren();
   if (event.target.matches('#navSearch')) {
     $searchView.classList.remove('hide');
     $upcomingView.classList.add('hide');
