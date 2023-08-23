@@ -229,6 +229,7 @@ function movieClickHandler(event) {
     data.watchlist.unshift(watchListMovie);
     $movieWatchlistResults.prepend(renderMovie(watchListMovie));
   } else if (event.target.tagName === 'IMG') {
+    document.documentElement.scrollTop = 0;
     const movieId = Number(event.target.closest('.movie').getAttribute('data-movie-id'));
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `${BASE_URL}/movie/${movieId}?${API_KEY}&append_to_response=videos,images`);
