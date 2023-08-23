@@ -79,6 +79,11 @@ ul a {
   font-size: 1rem;
 }
 
+.no-results-message {
+  color: #fff;
+  margin-top: 2rem;
+}
+
 /* Movie container (search and watchlist view) */
 .movie-results,
 .movie-upcoming-list,
