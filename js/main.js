@@ -18,6 +18,9 @@ const $navbar = document.querySelector('nav');
 const $searchBtn = document.querySelector('.search-button');
 const $searchInput = document.querySelector('.search-input');
 
+// No results message
+const $noResultsMessage = document.querySelector('.no-results-message');
+
 // Movie containers
 const $movieSearchResults = document.querySelector('.movie-results');
 const $movieUpcomingResults = document.querySelector('.movie-upcoming-list');
@@ -51,13 +54,20 @@ function searchMovies(searchTitle, resultPage) {
   xhr.addEventListener('load', function () {
     const response = xhr.response;
     data.totalPages = response.total_pages;
-    if (data.totalPages === data.currentPage) {
+    if (data.totalPages === resultPage) {
       $loadMoreButton.classList.add('hide');
     } else {
       $loadMoreButton.classList.remove('hide');
     }
-    for (let i = 0; i < response.results.length; i++) {
-      $movieSearchResults.append(renderMovie(response.results[i]));
+    if (response.total_results === 0) {
+      $movieSearchResults.classList.add('hide');
+      $noResultsMessage.classList.remove('hide');
+    } else {
+      for (let i = 0; i < response.results.length; i++) {
+        $noResultsMessage.classList.add('hide');
+        $movieSearchResults.classList.remove('hide');
+        $movieSearchResults.append(renderMovie(response.results[i]));
+      }
     }
   });
   xhr.send();
@@ -134,6 +144,7 @@ function renderMovie(result) {
 
 // View swap
 function viewSwap(event) {
+  $movieTrailer.replaceChildren();
   if (event.target.matches('#navSearch')) {
     $searchView.classList.remove('hide');
     $upcomingView.classList.add('hide');
@@ -179,10 +190,14 @@ $searchBtn.addEventListener('click', () => {
   $movieSearchResults.replaceChildren();
   data.currentPage = 1;
   const searchTitle = $searchInput.value.trim();
+
   if (searchTitle) {
     data.title = searchTitle;
     searchMovies(data.title, data.currentPage);
-    $movieSearchResults.classList.remove('hide');
+  } else {
+    $movieSearchResults.classList.add('hide');
+    $loadMoreButton.classList.add('hide');
+    $noResultsMessage.classList.remove('hide');
   }
   $searchInput.value = '';
   document.documentElement.scrollTop = 0;
@@ -214,6 +229,7 @@ function movieClickHandler(event) {
     data.watchlist.unshift(watchListMovie);
     $movieWatchlistResults.prepend(renderMovie(watchListMovie));
   } else if (event.target.tagName === 'IMG') {
+    document.documentElement.scrollTop = 0;
     const movieId = Number(event.target.closest('.movie').getAttribute('data-movie-id'));
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `${BASE_URL}/movie/${movieId}?${API_KEY}&append_to_response=videos,images`);

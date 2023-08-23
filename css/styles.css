@@ -79,6 +79,11 @@ ul a {
   font-size: 1rem;
 }
 
+.no-results-message {
+  color: #fff;
+  margin-top: 5rem;
+}
+
 /* Movie container (search and watchlist view) */
 .movie-results,
 .movie-upcoming-list,
@@ -224,6 +229,7 @@ ul a {
   margin-right: 1.5rem;
 }
 
+/* Movie details */
 .details-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -274,6 +280,10 @@ ul a {
   cursor: pointer;
   overflow: hidden;
   outline: none;
+}
+
+#movie-trailer {
+  margin-top: 2rem;
 }
 
 @media screen and (min-width: 520px) {
